@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
-import { Task, TaskStatus } from "./task.model";
+import { Task, TaskStatus, SortableKeys } from './task.model';
+import { getTasksByStatus, getPagination, getSorted } from './utils';
 
 @Injectable()
 export class TasksService {
@@ -40,5 +41,11 @@ export class TasksService {
     status?: TaskStatus,
     page?: number,
     limit?: number,
-  ): Task[] {}
+    sortBy?: SortableKeys,
+  ): Task[] {
+    const filteredTasks = getTasksByStatus(this.tasks, status);
+    const paginatedTasks = getPagination(filteredTasks, page, limit);
+    
+    return getSorted(paginatedTasks, sortBy);
+  }
 }
