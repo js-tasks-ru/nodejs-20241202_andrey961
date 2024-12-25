@@ -4,10 +4,11 @@ import {
   Delete,
   Get,
   Param,
-  ParseIntPipe,
   Patch,
-  Post,
+  Post, UseGuards
 } from "@nestjs/common";
+import { RolesGuard } from "../guards/roles.guard";
+import { ParseIntPipe } from "../pipes/parse-int.pipe";
 import { TasksService } from "./tasks.service";
 import { CreateTaskDto, UpdateTaskDto } from "./task.model";
 
@@ -26,6 +27,7 @@ export class TasksController {
   }
 
   @Post()
+  @UseGuards(RolesGuard)
   createTask(@Body() task: CreateTaskDto) {
     return this.tasksService.createTask(task);
   }
@@ -39,6 +41,7 @@ export class TasksController {
   }
 
   @Delete(":id")
+  @UseGuards(RolesGuard)
   deleteTask(@Param("id", ParseIntPipe) id: number) {
     return this.tasksService.deleteTask(id);
   }
