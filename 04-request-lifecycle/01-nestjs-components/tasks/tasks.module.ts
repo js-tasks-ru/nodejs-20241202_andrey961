@@ -8,6 +8,7 @@ import { TasksService } from "./tasks.service";
   controllers: [TasksController],
   providers: [TasksService],
 })
+
 export class TasksModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(LoggingMiddleware).forRoutes("");

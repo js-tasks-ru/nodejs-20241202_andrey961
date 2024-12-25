@@ -8,6 +8,7 @@ import {
 import * as request from "supertest";
 import { ApiVersionInterceptor } from "../api-version.interceptor";
 
+
 @Controller("mock")
 @UseInterceptors(ApiVersionInterceptor)
 class MockController {
