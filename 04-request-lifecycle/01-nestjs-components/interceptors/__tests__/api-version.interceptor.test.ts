@@ -6,7 +6,8 @@ import {
   UseInterceptors,
 } from "@nestjs/common";
 import * as request from "supertest";
-import { ApiVersionInterceptor } from "../../interceptors/api-version.interceptor";
+import { ApiVersionInterceptor } from "../api-version.interceptor";
+
 
 @Controller("mock")
 @UseInterceptors(ApiVersionInterceptor)
